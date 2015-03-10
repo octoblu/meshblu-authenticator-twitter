@@ -8,13 +8,12 @@ twitterOauthConfig =
   consumerKey: process.env.TWITTER_CLIENT_ID
   consumerSecret: process.env.TWITTER_CLIENT_SECRET
   callbackURL: process.env.TWITTER_CALLBACK_URL
-  passReqToCallback: true
 
 class TwitterConfig
   constructor: (@meshbluConn, @meshbluJSON) ->
     @meshbludb = new MeshbluDB @meshbluConn
 
-  onAuthentication: (request, accessToken, refreshToken, profile, done) =>
+  onAuthentication: (accessToken, refreshToken, profile, done) =>
     profileId = profile?.id
     fakeSecret = 'twitter-authenticator'
     authenticatorUuid = @meshbluJSON.uuid
