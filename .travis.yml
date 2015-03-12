@@ -3,15 +3,14 @@ sudo: false
 node_js:
 - '0.10'
 deploy:
-  provider: opsworks
+- provider: opsworks
   access_key_id: AKIAIT4X4NDGM2WVL6VA
   secret_access_key:
     secure: aG5TxRO5JEoDJFL6+sFrY3X/HlE6+6EZdG9rtoYIKtSnqlx6Tf0supAWpezQkLhpXRVZAxipYH9ReKk64xIgtsTRea/UlDxneUlLFnMTNtnH1K21/TBAw8RxagNzhSCnlQrb4C7+9n4CKkbhXTEq0IDyc5lDlmNxegG1veYuU2c=
   app-id: 32a7c7a2-9150-4967-9ac7-961df36411ae
   on:
     branch: master
-deploy:
-  provider: opsworks
+- provider: opsworks
   access_key_id: AKIAIT4X4NDGM2WVL6VA
   secret_access_key:
     secure: aG5TxRO5JEoDJFL6+sFrY3X/HlE6+6EZdG9rtoYIKtSnqlx6Tf0supAWpezQkLhpXRVZAxipYH9ReKk64xIgtsTRea/UlDxneUlLFnMTNtnH1K21/TBAw8RxagNzhSCnlQrb4C7+9n4CKkbhXTEq0IDyc5lDlmNxegG1veYuU2c=
