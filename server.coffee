@@ -8,6 +8,7 @@ passport = require 'passport'
 Router = require './app/routes'
 Config = require './app/config'
 meshblu = require 'meshblu'
+airbrake = require('airbrake').createClient process.env.AIRBRAKE_API_KEY
 debug = require('debug')('meshblu-twitter-authenticator:server')
 
 port = process.env.MESHBLU_TWITTER_AUTHENTICATOR_PORT ? 8008
@@ -15,6 +16,7 @@ port = process.env.MESHBLU_TWITTER_AUTHENTICATOR_PORT ? 8008
 app = express()
 app.use morgan('dev')
 app.use errorHandler()
+app.use airbrake.expressHandler()
 app.use bodyParser.json()
 app.use bodyParser.urlencoded(extended: true)
 app.use cookieParser()
@@ -48,7 +50,6 @@ catch
     name:   process.env.MESHBLU_TWITTER_AUTHENTICATOR_NAME
     server: process.env.MESHBLU_HOST
     port:   process.env.MESHBLU_PORT
-
 
 meshbluConn = meshblu.createConnection meshbluJSON
 
