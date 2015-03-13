@@ -3,7 +3,7 @@ morgan = require 'morgan'
 bodyParser = require 'body-parser'
 errorHandler = require 'errorhandler'
 cookieParser = require 'cookie-parser'
-session = require 'express-session'
+session = require 'cookie-session'
 passport = require 'passport'
 Router = require './app/routes'
 Config = require './app/config'
@@ -47,9 +47,9 @@ catch
   meshbluJSON =
     uuid:   process.env.MESHBLU_TWITTER_AUTHENTICATOR_UUID
     token:  process.env.MESHBLU_TWITTER_AUTHENTICATOR_TOKEN
-    name:   process.env.MESHBLU_TWITTER_AUTHENTICATOR_NAME
     server: process.env.MESHBLU_HOST
     port:   process.env.MESHBLU_PORT
+    name:   'Twitter Authenticator'
 
 meshbluConn = meshblu.createConnection meshbluJSON
 
@@ -60,7 +60,7 @@ meshbluConn.on 'ready', =>
     meshbluConn.setPrivateKey(device.privateKey) unless meshbluConn.privateKey
 
   app.listen port, =>
-    debug "Meshblu Google Authenticator..."
+    debug "Meshblu Twitter Authenticator..."
     debug "Listening at localhost:#{port}"
 
     config = new Config meshbluConn, meshbluJSON
