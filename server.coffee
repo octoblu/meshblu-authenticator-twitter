@@ -56,7 +56,7 @@ meshbludb = new MeshbluDB meshbluJSON
 meshbludb.findOne uuid: meshbluJSON.uuid, (error, device) ->
   meshbludb.setPrivateKey(device.privateKey) unless meshbludb.privateKey
 
-config = new Config meshbluConn, meshbluJSON
+config = new Config meshbludb, meshbluJSON
 config.register()
 
 router = new Router app
