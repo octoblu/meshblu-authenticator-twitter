@@ -1,18 +1,4 @@
 language: node_js
 sudo: false
 node_js:
-- '0.10'
-deploy:
-- provider: opsworks
-  access_key_id: AKIAJH2D5IPIRHYJT5IA
-  secret_access_key: &1
-    secure: h7MmaWM43L5UP8RXXAjFg0aLg7ZpGgwob1p2WSZa+nLq+fMg8qxWKuJntS0tM0z+UsJASq6v6BaZCYmGuVeqk1H6+l8abtG7ssQSd6wIgDQGC+qNJbekynoNhDykciQoFcvg4ddfC8mzCSlEL4udbfoV+rBIyzSceupnaBhaZ1o=
-  app-id: 32a7c7a2-9150-4967-9ac7-961df36411ae
-  on:
-    branch: master
-- provider: opsworks
-  access_key_id: AKIAJH2D5IPIRHYJT5IA
-  secret_access_key: *1
-  app-id: ed69c5c9-1bee-4495-b339-8f1ad1ff5bce
-  on:
-    branch: staging
+- '5'
