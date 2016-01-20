@@ -10,14 +10,14 @@ twitterOauthConfig =
   passReqToCallback: true
 
 class TwitterConfig
-  constructor: (@meshbludb, @meshbluJSON) ->
+  constructor: ({@meshbluHttp, @meshbluJSON}) ->
 
   onAuthentication: (request, accessToken, refreshToken, profile, done) =>
     profileId = profile?.id
     fakeSecret = 'twitter-authenticator'
     authenticatorUuid = @meshbluJSON.uuid
     authenticatorName = @meshbluJSON.name
-    deviceModel = new DeviceAuthenticator authenticatorUuid, authenticatorName, meshbludb: @meshbludb
+    deviceModel = new DeviceAuthenticator {authenticatorUuid, authenticatorName, @meshbluHttp}
     query = {}
     query[authenticatorUuid + '.id'] = profileId
     device =
@@ -36,9 +36,14 @@ class TwitterConfig
     deviceFindCallback = (error, foundDevice) =>
       # return done error if error?
       return getDeviceToken foundDevice.uuid if foundDevice?
-      deviceModel.create query, device, profileId, fakeSecret, deviceCreateCallback
+      deviceModel.create
+        query: query
+        data: device
+        user_id: profileId
+        secret: fakeSecret
+      , deviceCreateCallback
 
-    deviceModel.findVerified query, fakeSecret, deviceFindCallback
+    deviceModel.findVerified query: query, password: fakeSecret, deviceFindCallback
 
   register: =>
     passport.use new TwitterStrategy twitterOauthConfig, @onAuthentication
