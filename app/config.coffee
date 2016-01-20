@@ -25,7 +25,7 @@ class TwitterConfig
       type: 'octoblu:user'
 
     getDeviceToken = (uuid) =>
-      @meshbludb.generateAndStoreToken uuid, (error, device) =>
+      @meshbluHttp.generateAndStoreToken uuid, (error, device) =>
         device.id = profileId
         done null, device
 
